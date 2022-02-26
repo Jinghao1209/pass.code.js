@@ -1,0 +1,29 @@
+{
+    "name": "pass.code.js",
+    "version": "1.0.0",
+    "description": "encrypted your things...",
+    "main": "./src/index.js",
+    "types": "./typings/index.d.ts",
+    "scripts": {
+        "test": "echo \"Hello from pass.code.js!\""
+    },
+    "directories": {
+        "lib": "src"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Jinghao1209/pass.code.js.git"
+    },
+    "keywords": [
+        "password",
+        "passcode",
+        "passcodejs",
+        "encryption"
+    ],
+    "author": "Jinghao1209 <jinghao1209@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Jinghao1209/pass.code.js/issues"
+    },
+    "homepage": "https://github.com/Jinghao1209/pass.code.js#readme"
+}

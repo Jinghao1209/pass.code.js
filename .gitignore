@@ -1,0 +1,11 @@
+node_modules/
+*.local
+*.env
+test/
+*.test.*
+*.log
+*.lock
+
+.DS_Store
+.vscode/
+*.ignore
