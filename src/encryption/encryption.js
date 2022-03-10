@@ -8,13 +8,21 @@ const __1 = require("..");
  * @link https://en.wikipedia.org/wiki/ASCII#Printable_characters
  */
 function Encryption(word, style = "13") {
-    let tmp = (0, __1.wordToASCII)(style), l = tmp.length - 1, enc = "";
+    let tmp = (0, __1.wordToASCII)(style), l = tmp.length - 1, enc = [], long = word.length < tmp.length;
     // for each, word[i] * style[n] + ":"
-    for (let i = 0; i < word.length; i++, l--) {
-        if (l <= -1)
-            l = tmp.length - 1;
-        enc += (word[i] * tmp[l]) + (i + 1 === word.length ? "" : ":");
-    }
-    return enc;
+    if (!long)
+        for (let i = 0; i < word.length; i++, l--) {
+            // if style not enough
+            if (l <= -1)
+                l = tmp.length - 1;
+            enc.push(word[i] * tmp[l]);
+        }
+    else
+        for (let i = 0, j = 0; i < tmp.length; i++, j++) {
+            if (j === word.length)
+                j = 0;
+            j < i ? (enc[j] = enc[j] ^ tmp[i]) : enc.push(word[j] * tmp[i]);
+        }
+    return enc.join(":");
 }
 exports.default = Encryption;

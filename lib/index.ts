@@ -6,6 +6,7 @@ export { default as EnRailFenceCipher } from "./encryption/enRailFenceCipher";
 export { default as DeRailFenceCipher } from "./encryption/deRailFenceCipher";
 export { default as HexToWord } from "./encryption/hexToWord";
 export { default as WordToHex } from "./encryption/wordToHex";
+export * from "./encryption/crypto";
 
 // the basic as basic, if here error, all error
 export function wordToASCII(word: string): number[] {
