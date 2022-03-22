@@ -3,12 +3,16 @@ import type {
     BinaryToTextEncoding,
     HashOptions,
     KeyPairSyncResult,
+    RsaPrivateKey,
+    RsaPublicKey,
     ScryptOptions,
 } from "crypto";
+import type { ASCII, MaybeKey } from "./types";
+export * as crypto from "crypto";
 
-export declare type ASCII = number[];
 export function wordToASCII(word: string): ASCII;
 export function ASCIItoWord(word: ASCII): string;
+export function bufferToHex(buffer: Buffer): string;
 
 /**
  * 加密字符 Encrypted characters or word
@@ -42,21 +46,27 @@ export function HexToWord(hex: string): string;
  * @author module from nodejs build-in crypto
  * @author import("crypto");
  *
+ * @function crypto
  * @function addSalt
  * @function generateKeyPairSync
  * @function generateRSAKeyPair
  * @function generateSalt
  * @function hash
+ * @function privateDecrypt
+ * @function publicEncrypt
  * @function saltMatch
  * @warn not support all functionality
  * @link https://nodejs.org/api/crypto.html
  */
 export const _cryptoInfo: {
+    crypto: typeof import("crypto");
     addSalt: typeof addSalt;
     generateKeyPairSync: typeof import("crypto").generateKeyPairSync;
     generateRSAKeyPair: typeof generateRSAKeyPair;
     generateSalt: typeof generateSalt;
     hash: typeof hash;
+    privateDecrypt: typeof privateDecrypt;
+    publicEncrypt: typeof publicEncrypt;
     saltMatch: typeof saltMatch;
 };
 
@@ -170,3 +180,72 @@ export function addSalt(
  * @param salty a hex after `addSalt(...)`, the salt should be same as param `salt`
  */
 export function saltMatch(data: string, salt: string, salty: string): boolean;
+
+/**
+ * A simple encryption.
+ *
+ *
+ * ```js
+ * const {
+ *     crypto,
+ *     generateRSAKeyPair,
+ *     publicEncrypt,
+ * } = require("pass.code.js");
+ *
+ * const { publicKey } = generateRSAKeyPair();
+ * const content = "This is an sentence";
+ *
+ * const encryptedData = publicEncrypt(
+ *     // We convert the data string to a buffer using `Buffer.from`
+ *     Buffer.from(content),
+ *     publicKey,
+ *     {
+ *         // RSA_PKCS1_OAEP_PADDING as default
+ *         // for those who don't need padding, set to:
+ *         // padding: undefined,
+ *         padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+ *         // `pass.code.js` change algorithm `SHA3-512` as default
+ *         oaepHash: "sha3-512",
+ *     }
+ * );
+ * ```
+ *
+ * @from import("crypto").publicEncrypt
+ * @from import("pass.code.js").crypto.publicEncrypt
+ */
+export function publicEncrypt(
+    content: NodeJS.ArrayBufferView,
+    publicKey: string,
+    options?: MaybeKey<RsaPublicKey | RsaPrivateKey>
+): Buffer;
+
+/**
+ * A simple decryption.
+ *
+ *
+ * ```js
+ * const decryptedData = privateDecrypt(
+ *     encryptedData, // see function pass.code.js/publicEncrypt()
+ *     privateKey,
+ *     {
+ *         // RSA_PKCS1_OAEP_PADDING as default
+ *         padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+ *         // SHA3-512 as default
+ *         oaepHash: "sha3-512",
+ *     }
+ * );
+ *
+ * // The decrypted data is of the Buffer type, which we can convert to a
+ * // string to reveal the original data
+ * // same as `content`
+ * console.log("Decrypted data: ", decryptedData.toString());
+ * ```
+ *
+ * @from import("crypto").privateDecrypt
+ * @from import("pass.code.js").crypto.privateDecrypt
+ */
+export function privateDecrypt(
+    content: NodeJS.ArrayBufferView,
+    privateKey: string,
+    options?: MaybeKey<RsaPublicKey | RsaPrivateKey>
+): Buffer;

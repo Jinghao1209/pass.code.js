@@ -1,3 +1,6 @@
+## 1.3.0 (22/3, 2022)
+For RSA or other algorithm, add `privateDecrypt()` and `publicEncrypt()` function.
+
 ## 1.2.0 (10/3, 2022)
 Update `Decryption(...)` and `Encryption(...)` to make then more secure, and add new function, some new function is use library from nodejs modules, named `crypto` 
 
