@@ -14,6 +14,7 @@ import type {
     RSAPublicKeyEncoding,
 } from "./types";
 export * as crypto from "crypto";
+export * from "./types";
 
 export function wordToASCII(word: string): ASCII;
 export function ASCIItoWord(word: ASCII): string;
@@ -124,7 +125,7 @@ export function hash(
 
 /**
  * @warn do not play `privateKeyEncoding` | `publicKeyEncoding` because don't have any types check, if options error, you will get a error
- * 
+ *
  * this is a simple generate rsa from
  *
  * ```js
