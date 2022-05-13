@@ -1,4 +1,11 @@
 import crypto from "crypto";
+import {
+    RSAPrivateKeyEncoding,
+    RSAPublicKeyEncoding,
+} from "../../typings/types";
+
+export { generateKeyPairSync } from "crypto";
+export { randomUUID as generateUUID } from "crypto";
 
 export function hash(
     data: crypto.BinaryLike,
@@ -9,17 +16,22 @@ export function hash(
     return crypto.createHash(algorithm, options).update(data).digest(encoding);
 }
 
-export { generateKeyPairSync } from "crypto";
-export function generateRSAKeyPair() {
+export function generateRSAKeyPair(
+    length = 2048,
+    privateKeyEncoding: RSAPrivateKeyEncoding = {},
+    publicKeyEncoding: RSAPublicKeyEncoding = {}
+) {
     return crypto.generateKeyPairSync("rsa", {
-        modulusLength: 2048, // the length of your key in bits
+        modulusLength: length, // the length of your key in bits
         publicKeyEncoding: {
             type: "spki", // recommended to be 'spki' by the Node.js docs
             format: "pem",
+            ...publicKeyEncoding as any,
         },
         privateKeyEncoding: {
             type: "pkcs8", // recommended to be 'pkcs8' by the Node.js docs
             format: "pem",
+            ...privateKeyEncoding as any,
             // cipher: 'aes-256-cbc',
             // passphrase: 'top secret'
         },
@@ -38,11 +50,7 @@ export function addSalt(
     return crypto.scryptSync(data, salt, 64, addSaltOptions).toString("hex");
 }
 
-export function saltMatch(
-    data: string,
-    salt: string,
-    salty: string
-): boolean {
+export function saltMatch(data: string, salt: string, salty: string): boolean {
     const hashedBuffer = crypto.scryptSync(data, salt, 64);
 
     const keyBuffer = Buffer.from(salty, "hex");

@@ -7,7 +7,12 @@ import type {
     RsaPublicKey,
     ScryptOptions,
 } from "crypto";
-import type { ASCII, MaybeKey } from "./types";
+import type {
+    ASCII,
+    MaybeKey,
+    RSAPrivateKeyEncoding,
+    RSAPublicKeyEncoding,
+} from "./types";
 export * as crypto from "crypto";
 
 export function wordToASCII(word: string): ASCII;
@@ -54,6 +59,7 @@ export function HexToWord(hex: string): string;
  * @function hash
  * @function privateDecrypt
  * @function publicEncrypt
+ * @function randomUUID
  * @function saltMatch
  * @warn not support all functionality
  * @link https://nodejs.org/api/crypto.html
@@ -67,8 +73,12 @@ export const _cryptoInfo: {
     hash: typeof hash;
     privateDecrypt: typeof privateDecrypt;
     publicEncrypt: typeof publicEncrypt;
+    randomUUID: typeof import("crypto").randomUUID;
     saltMatch: typeof saltMatch;
 };
+
+export { generateKeyPairSync } from "crypto";
+export { randomUUID as generateUUID } from "crypto";
 
 /**
  * @author import("crypto").createHash
@@ -112,8 +122,9 @@ export function hash(
     options?: HashOptions
 ): string;
 
-export { generateKeyPairSync } from "crypto";
 /**
+ * @warn do not play `privateKeyEncoding` | `publicKeyEncoding` because don't have any types check, if options error, you will get a error
+ * 
  * this is a simple generate rsa from
  *
  * ```js
@@ -121,8 +132,15 @@ export { generateKeyPairSync } from "crypto";
  *     generateKeyPairSync
  * } = await import("crypto")
  * ```
+ *
+ * @param length default is 2048
  */
-export function generateRSAKeyPair(): KeyPairSyncResult<string, string>;
+export function generateRSAKeyPair(
+    length?: number,
+    privateKeyEncoding?: RSAPrivateKeyEncoding,
+    publicKeyEncoding?: RSAPublicKeyEncoding
+): KeyPairSyncResult<string, string>;
+
 /**
  * a simple random bytes from
  * ```js

@@ -10,7 +10,6 @@ export function publicEncrypt(
         {
             key: publicKey,
             padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-            oaepHash: "sha3-512",
             ...options,
         },
         content
@@ -26,7 +25,6 @@ export function privateDecrypt(
         {
             key: privateKey,
             padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-            oaepHash: "sha3-512",
             ...options,
         },
         content

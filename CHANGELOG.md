@@ -1,3 +1,6 @@
+## 1.4.0 (13/5, 2022)
+Fixed a bug that RSA Encryption was not working properly and now can specify all the RSA Key include length! Add a new function, `generateUUID()`. 
+
 ## 1.3.0 (22/3, 2022)
 For RSA or other algorithm, add `privateDecrypt()` and `publicEncrypt()` function.
 
