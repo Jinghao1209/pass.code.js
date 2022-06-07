@@ -43,6 +43,7 @@ var wordToHex_1 = require("./crypto/wordToHex");
 Object.defineProperty(exports, "WordToHex", { enumerable: true, get: function () { return __importDefault(wordToHex_1).default; } });
 __exportStar(require("./crypto/crypto"), exports);
 __exportStar(require("./crypto/keyCrypt"), exports);
+__exportStar(require("./crypto/AES"), exports);
 exports.crypto = __importStar(require("crypto"));
 // the basic as basic, if here error, all error
 function wordToASCII(word) {

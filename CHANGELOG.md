@@ -1,3 +1,6 @@
+## 1.5.0 (7/6, 2022)
+Add AES encryption function into package! Support AES-CCM/AES-GCM (128/192/256 bits)
+
 ## 1.4.0 (13/5, 2022)
 Fixed a bug that RSA Encryption was not working properly and now can specify all the RSA Key include length! Add a new function, `generateUUID()`. 
 

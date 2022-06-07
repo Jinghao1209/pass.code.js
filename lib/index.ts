@@ -8,6 +8,7 @@ export { default as HexToWord } from "./crypto/hexToWord";
 export { default as WordToHex } from "./crypto/wordToHex";
 export * from "./crypto/crypto";
 export * from "./crypto/keyCrypt";
+export * from "./crypto/AES";
 export * as crypto from "crypto";
 
 // the basic as basic, if here error, all error
