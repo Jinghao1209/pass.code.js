@@ -24,7 +24,7 @@ var __importStar = (undefined && undefined.__importStar) || function (mod) {
 };
 var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
-};exports.bufferToHex = exports.ASCIItoWord = exports.wordToASCII = exports.crypto = exports.WordToHex = exports.HexToWord = exports.DeRailFenceCipher = exports.EnRailFenceCipher = exports.DePhone9Key = exports.EnPhone9Key = exports.Encryption = exports.Decryption = void 0;
+};exports.ASCIItoWord = exports.wordToASCII = exports.crypto = exports.DeRailFenceCipher = exports.EnRailFenceCipher = exports.DePhone9Key = exports.EnPhone9Key = exports.Encryption = exports.Decryption = void 0;
 var decryption_1 = require("./decryption/decryption");
 Object.defineProperty(exports, "Decryption", { enumerable: true, get: function () { return __importDefault(decryption_1).default; } });
 var encryption_1 = require("./encryption/encryption");
@@ -37,10 +37,7 @@ var enRailFenceCipher_1 = require("./encryption/enRailFenceCipher");
 Object.defineProperty(exports, "EnRailFenceCipher", { enumerable: true, get: function () { return __importDefault(enRailFenceCipher_1).default; } });
 var deRailFenceCipher_1 = require("./decryption/deRailFenceCipher");
 Object.defineProperty(exports, "DeRailFenceCipher", { enumerable: true, get: function () { return __importDefault(deRailFenceCipher_1).default; } });
-var hexToWord_1 = require("./crypto/hexToWord");
-Object.defineProperty(exports, "HexToWord", { enumerable: true, get: function () { return __importDefault(hexToWord_1).default; } });
-var wordToHex_1 = require("./crypto/wordToHex");
-Object.defineProperty(exports, "WordToHex", { enumerable: true, get: function () { return __importDefault(wordToHex_1).default; } });
+__exportStar(require("./hex"), exports);
 __exportStar(require("./crypto/crypto"), exports);
 __exportStar(require("./crypto/keyCrypt"), exports);
 __exportStar(require("./crypto/AES"), exports);
@@ -60,7 +57,3 @@ function ASCIItoWord(word) {
     return x.join("");
 }
 exports.ASCIItoWord = ASCIItoWord;
-function bufferToHex(buffer) {
-    return buffer.toString("hex");
-}
-exports.bufferToHex = bufferToHex;

@@ -1,3 +1,6 @@
+## 1.5.1 (19/6, 2002)
+Fix hex bug, now can hex from any utf-8 character.
+
 ## 1.5.0 (7/6, 2022)
 Add AES encryption function into package! Support AES-CCM/AES-GCM (128/192/256 bits)
 

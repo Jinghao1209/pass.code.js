@@ -12,6 +12,7 @@ import type {
     AESAlgorithm,
     AESIv,
     ASCII,
+    Hex,
     MaybeKey,
     RSAPrivateKeyEncoding,
     RSAPublicKeyEncoding,
@@ -21,7 +22,7 @@ export * from "./types";
 
 export function wordToASCII(word: string): ASCII;
 export function ASCIItoWord(word: ASCII): string;
-export function bufferToHex(buffer: Buffer): string;
+export function bufferToHex(buffer: Buffer): Hex;
 
 /**
  * 加密字符 Encrypted characters or word
@@ -44,11 +45,8 @@ export function DePhone9Key(word: string): string;
 export function EnRailFenceCipher(word: string): string;
 export function DeRailFenceCipher(word: string): string;
 
-export function WordToHex(word: string): string;
-/**
- * Not Support Chinese Word...
- */
-export function HexToWord(hex: string): string;
+export function WordToHex(word: string): Hex;
+export function HexToWord(hex: Hex): string;
 
 /**
  * @readonly this is undefined
@@ -314,5 +312,5 @@ export function privateDecrypt(
  */
 export function AES<K extends keyof AESAlgorithm>(algorithm: K, key: Buffer, returnType: BufferEncoding): {
     encrypt: (data: string) => AESAlgorithm[K];
-    decrypt: (encoded: string, iv: AESIv, authTag?: AESAlgoGCMAuthTag) => Buffer;
+    decrypt: (encoded: string, iv: AESIv, authTag?: AESAlgoGCMAuthTag) => string;
 };

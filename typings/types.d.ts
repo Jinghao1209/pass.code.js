@@ -1,6 +1,7 @@
 import crypto from "crypto";
 
 export declare type ASCII = number[];
+export declare type Hex = string;
 export declare type MaybeKey<K> = {
     [key in keyof K]?: K[key];
 };
