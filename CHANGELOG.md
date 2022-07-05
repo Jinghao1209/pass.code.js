@@ -1,3 +1,6 @@
+## 1.5.2 (5/7, 2022)
+Fix `AES` CCM bug, because authTagLength required in aes-`mode`-ccm but authTagLength is not in cipher initialize.
+
 ## 1.5.1 (19/6, 2002)
 Fix hex bug, now can hex from any utf-8 character.
 

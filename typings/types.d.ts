@@ -7,7 +7,7 @@ export declare type MaybeKey<K> = {
 };
 
 //#region AES
-export declare type AESAlgoGCMAuthTag = Buffer;
+export declare type AESAlgoAuthTag = Buffer;
 export declare type AESIv = string;
 //#endregion
 
@@ -23,13 +23,14 @@ export declare interface RSAPrivateKeyEncoding {
     type?: "pkcs1" | "pkcs8";
 }
 
+type decoded = string;
+type AESAlgoReturnType = [decoded, AESIv, crypto.Cipher, AESAlgoAuthTag];
 export declare interface AESAlgorithm {
-    "aes-128-ccm": [string, AESIv, crypto.Cipher];
-    "aes-128-gcm": [string, AESIv, crypto.Cipher, AESAlgoGCMAuthTag];
-    "aes-192-ccm": [string, AESIv, crypto.Cipher];
-    "aes-192-gcm": [string, AESIv, crypto.Cipher, AESAlgoGCMAuthTag];
-    "aes-256-ccm": [string, AESIv, crypto.Cipher];
-    "aes-256-gcm": [string, AESIv, crypto.Cipher, AESAlgoGCMAuthTag];
-    "chacha20-poly1305": [string, AESIv, crypto.Cipher];
+    "aes-128-ccm": AESAlgoReturnType;
+    "aes-128-gcm": AESAlgoReturnType;
+    "aes-192-ccm": AESAlgoReturnType;
+    "aes-192-gcm": AESAlgoReturnType;
+    "aes-256-ccm": AESAlgoReturnType;
+    "aes-256-gcm": AESAlgoReturnType;
+    "chacha20-poly1305": [decoded, AESIv, crypto.Cipher];
 }
-
